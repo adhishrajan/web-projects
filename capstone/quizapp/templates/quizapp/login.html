@@ -1,0 +1,35 @@
+{% extends "quizapp/layout.html" %}
+
+{% block body %}
+
+    {% if message %}
+    <h5>{{message}}</h5>
+    {% endif %}
+
+    <div>
+        <div class="card cardborder">
+            <div class="card-body">
+            <h5 class="card-title">Login</h5>
+            <p class="card-text">
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="password" name="password" placeholder="Password">
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Login">
+                </form>
+            </p>
+            Don't have an account? <a href="{% url 'register' %}" class="card-link">Register Here.</a> 
+            </div>
+        </div>
+    </div>
+
+    
+   
+{% endblock %}
+
+
+  

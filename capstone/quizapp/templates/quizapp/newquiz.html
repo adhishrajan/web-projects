@@ -1,0 +1,58 @@
+{% extends "quizapp/layout.html" %}
+{% load static %}
+{% block body %}
+
+<h1 style="text-align: center;">Create Quiz</h1>
+
+<form action="{% url 'newquiz' %}" method="POST" id="forma">
+    {% csrf_token %}
+    <div class="form-group">
+        <input class="form-control" type="text" name="name" placeholder="Name">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" name="creator" value="{{user}}" placeholder="Owner">
+    </div>
+    <div class="form-group">
+        <select class="custom-select" name="subject">
+            <option selected disabled>Subject</option>
+            <option value="Math">Math</option>
+            <option value="Science">Science</option>
+            <option value="Reading">Reading</option>
+            <option value="Social Studies">Social Studies</option>
+            <option value="Other">Other</option>
+          </select>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="number" id="questionamt" min="1" name="questionamt" placeholder="Number of Questions">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="number" min="0" name="passingscore" placeholder="Score to Pass (in %)">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="number" min="1" name="time" placeholder="Time Allotted (in minutes)">
+    </div>
+    <div class="form-group">
+        <select class="custom-select" name="difficulty">
+            <option selected disabled>Difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+    </div>
+    <div class="form-group">
+        <button id="sub" class="btn btn-success" type="submit" style="align-self: center; display: none;">Submit</button>
+    </div>
+    <div class="form-group">
+        <btn class="btn btn-secondary" href="#" id="bro">Add Questions</btn>
+    </div>
+</form>
+
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'quizapp/newquiz.js' %}"></script>
+{% endblock scripts %}

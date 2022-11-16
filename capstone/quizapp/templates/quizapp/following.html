@@ -1,0 +1,102 @@
+{% extends "quizapp/layout.html" %}
+
+
+{% block body %}
+
+
+<br><br>
+<h1 style="text-align: center;">Subscribed</h1>
+<hr style="width: 50%">
+{% if empty %}
+<h2 class="center">No Quizzes Available</h2>
+{% endif %}
+
+<div class="modal fade" id="quizStartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Start Quiz</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modbody">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button type="button" id="start" class="btn btn-success">Start</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% for quiz in page_obj %}
+
+<div class="post-view">
+  <div class="card" style="width: 75%; margin-left: auto; margin-right: auto; border-color: black;">
+      <div class="card-header" style="background-color: rgb(200, 201, 199);">
+        <b><a style="color:black" href="{% url 'myquizzes' quiz.creator %}">{{quiz.creator}}</a></b>
+        <span class="topright badge badge-pill badge-secondary">High score: {{quiz.bestscore}}% by {{quiz.bestscoreuser}}</span>
+      </div>
+  
+      <ul class="list-group list-group-flush">
+        <li id="postbody{{post.id}}" class="list-group-item">
+          <button class="btn btn-link modal-button" 
+          data-subject="{{quiz.subject}}"
+          data-creator="{{quiz.creator}}"
+          data-pk="{{quiz.pk}}" 
+          data-quiz="{{quiz.name}}" 
+          data-questions="{{quiz.questionamt}}" 
+          data-difficulty="{{quiz.difficulty}}" 
+          data-time="{{quiz.time}}"
+          data-pass="{{quiz.passingscore}}"
+          data-toggle="modal" data-target="#quizStartModal"
+          style="color: black">
+
+          {{quiz.name}}
+          
+          </button>
+          
+        </li>
+          <small class="text-muted" style="position: absolute; bottom: 10px; right: 10px;">{{ quiz.timestamp }}</small>
+      </ul>
+
+    </div>
+    <br>
+  </div>
+
+{% endfor %}
+
+ 
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      {% if page_obj.has_previous %}
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+          {% endif %}
+    </li>
+    {% if page_obj.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% endif %}
+    <li class="page-item">
+      {% if page_obj.has_next %}
+      <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>  </li>
+        {% endif %}
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<span class="current">
+  <h5 style="text-align: center; color:  rgb(73, 73, 73);">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</h5>
+</span>
+
+    
+</div>
+
+{% endblock %}

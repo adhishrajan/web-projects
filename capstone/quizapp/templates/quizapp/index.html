@@ -1,0 +1,35 @@
+{% extends "quizapp/layout.html" %}
+
+{% block body %}
+<br><br>
+<section>
+    <div class="container">
+        <div class="row vh-md-100">
+            <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
+                <h1 class="heading-black text-capitalize">Quizzer Quizapp!</h1>
+                <p class="lead py-3 text-capitalize">Welcome to Quizapp, where you can test your knowledge to the fullest!
+                    {% if user.is_authenticated %}
+                    {% else %}
+                    Sign up for free.
+                    {% endif %}
+                </p>
+                
+                {% if user.is_authenticated %}
+                    <a href="{% url 'quizlist' %}">
+                        <button class="text-capitalize btn btn-primary d-inline-flex flex-row align-items-center">
+                            Click here to get started, {{user.username}}!
+                        </button>
+                    </a>
+                {% else %}
+                    <a href="{% url 'register' %}">
+                        <button class="text-capitalize btn btn-primary d-inline-flex flex-row align-items-center">
+                            Sign up now!
+                        </button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
