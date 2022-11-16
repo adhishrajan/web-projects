@@ -1,0 +1,13 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+<ul style="text-transform: capitalize; font-size: 25px; color: black;">
+{% for user in users %}
+<li>
+    <a style="color: black" href="{% url 'details' username=user %}">{{user.username}}</a>
+</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

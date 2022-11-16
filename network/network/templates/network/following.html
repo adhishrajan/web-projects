@@ -1,0 +1,72 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+
+<br><br>
+<h1 style="text-align: center;">Following</h1>
+<hr style="width: 50%">
+{% if empty %}
+<h2 class="w">No Posts Available</h2>
+{% endif %}
+
+
+
+
+    {% for post in page_obj %} 
+        <div class="post-view">
+        <div class="card" style="width: 50rem; margin-left: auto; margin-right: auto; border-color: black;">
+            <div class="card-header" style="background-color: lightblue;">
+              <b><a style="color:black" href="{% url 'details' username=post.user %}">{{post.user}}</a></b>
+            </div>
+        
+            <ul class="list-group list-group-flush">
+              <li id="postbody{{post.id}}" class="list-group-item">{{post.body}}</li>
+              <textarea class="form-control mb-2 hi2" style="padding-top: 10px;" id="edtext{{post.id}}" placeholder="{{post.body}}" name="edit-box"></textarea>
+              <button id="edsub{{post.id}}" style="width: 100px;" class="btn btn-info hi">Save</button>
+              <li class="list-group-item">
+                <button class="btn" style="background-color:white; outline: none;" id="likesub{{post.id}}" onclick="like('{{ post.id }}')">
+                    <i id="heart" class="fas fa-heart"></i>
+                </button>
+                <div id="likenum{{post.id}}" class="d-inline-block">{{ post.likes }}</div>
+                <small class="text-muted" style="position: absolute; bottom: 10px; right: 10px;">{{ post.timestamp }}</small>
+              </li>  
+            </ul>
+    
+          </div>
+          <br>
+        </div>
+    {% endfor %}
+
+
+  <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          {% if page_obj.has_previous %}
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+            {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+              {% endif %}
+        </li>
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% endif %}
+        <li class="page-item">
+          {% if page_obj.has_next %}
+          <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>  </li>
+            {% endif %}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  
+    <span class="current">
+      <h5 style="text-align: center; color: rgb(64, 140, 165);">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</h5>
+  </span>
+
+    
+</div>
+
+{% endblock %}
