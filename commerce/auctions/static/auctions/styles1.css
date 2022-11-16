@@ -1,0 +1,61 @@
+#aa {
+    list-style-type:none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 0px;
+}
+
+i:hover {
+    transform: scale(1.8);
+    transition: all 0.1s ease-in-out;
+    background-size: 4px 50px;
+    
+}
+
+i {
+    background:
+       linear-gradient(
+         to bottom, var(--mainColor) 0%,
+         var(--mainColor) 100%
+       );
+    background-position: 0 100%;
+    background-repeat: repeat-x;
+    background-size: 4px 4px;
+    color: #000;
+    text-decoration: none;
+    transition: background-size .2s;
+  }
+
+#aa2 {
+    list-style-type: none;
+}
+
+#signedin {
+    margin-top: 10px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+  
