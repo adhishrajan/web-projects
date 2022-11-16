@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="container">
+    <h1 style="text-align: center;">{{ a.name }}</h1>
+</div>
+<div class="container" id="listings">
+    <h3 style="text-align: center;">This listing is no longer active.</h3>
+
+    {% if a.winner == user.username %}
+    <div class="alert alert-success" role="alert">
+        <h1 class="alert-heading"> Congratulations! </h1>
+        <p>You won this product!</p>{% endif %}
+        <hr>
+        <p class="mb-0">
+            <ul>
+                <li><b>Owner: </b>{{ a.owner }}</li>
+                <li><b>Winner: </b>{{ a.winner }}</li>
+                <li><b>Winning Price: </b>${{ a.winprice }}</li>
+            </ul>    
+        </p>
+    </div>
+  
+  
+ 
+{% endblock %}

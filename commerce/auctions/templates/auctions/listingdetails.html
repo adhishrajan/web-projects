@@ -1,0 +1,123 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %} 
+
+{% if wrong %}
+<div class="alert alert-danger" role="alert">
+    {{ wrong }}
+  </div>
+{% endif %}
+
+{% if success %}
+<div class="alert alert-success" role="alert">
+    {{ success }}
+</div>
+{% endif %}
+
+<div class="container">
+    <h2 style="text-align: center;">{{ ling.name }}</h2>
+    <div class="container" style="text-align: center;">
+        <img src="{{ ling.img }}" width="30%" alt="...">
+    </div>
+    <br>
+    <p style="text-align: center;"><b>Description:</b> {{ ling.description }}</p>
+    <br>
+    <p>
+      
+    {% if request.user.username != ling.owner %}
+      {% if watched %}
+        <a href="{% url 'removelist' ling.id %}"><button class="btn btn-outline-danger btn-lg btn-block">Remove from watchlist</button></a>
+      {% else %}
+        <a href="{% url 'addlist' ling.id %}"><button class="btn btn-outline-success btn-lg btn-block">Add to watchlist</button></a>
+      {% endif %}
+    {% else %}
+        <a href="{% url 'close' ling.id %}" class="btn btn-info btn-lg"> Close Bid </a>
+    {% endif %}   
+
+
+    </p>
+    <br>
+    <h4 style="font-size: 48px; color: green;"><strong>Current Bid: ${{ ling.price }}</strong></h4>
+    
+    <br>
+
+    <p><b>
+    About {{ ling.name }}: 
+      <ul>
+        <li>Owner: {{ ling.owner }}</li>
+        <li>Category: {{ ling.category }}</li>
+        <li>Created on: {{ ling.date }} at {{ ling.time }}</li>
+      </ul>
+    </b></p>
+
+
+  <br><br>
+
+  {% if request.user.username != ling.owner %}
+
+    <div class="container">
+        <h4>Make a bid:</h4>
+  
+  {% endif %}    
+        
+        <h5>({{ bidamnt }}) bids have been made so far. {% if winn %} Highest bid has been made by {{ winn.user }} {% endif %}</h5>
+      
+    {% if request.user.username != ling.owner %}
+      
+        <form action="{% url 'bid' ling.id %}" method="POST">
+            {% csrf_token %}
+              <div class="form-row align-items-center">
+                <div class="col-auto">
+                  <input type="number" class="form-control mb-2" id="inlineFormInput" name="bid" placeholder="...">
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                </div>
+              </div>
+        </form>
+
+    </div>
+    {% endif %}
+    <br>
+    <hr>
+    <div class="container">
+       <form action="{% url 'comments' ling.id %}" method="POST">
+          {% csrf_token %}
+        <div class="form-group">
+          <i class="fas fa-comments fa-3x"></i> <b style="margin-left: 30px; font-size: 20px;">Comment here:</b> 
+          <br> <br>
+          <textarea class="form-control" id="area" rows="5" name="comments" placeholder="Add a public comment"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Comment</button>
+      </form>
+    </div>
+    <br>
+
+
+    {% if coms %}
+      <h3>Comments:</h3>
+      <div class="container">
+          
+          {% for comment in coms %}
+          <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title"><b>{{ comment.user }}</b> <small class="text-muted" style="font-size: 10px;">{{ comment.date }} at {{ comment.time }}</small></h5>
+                  <hr>
+                  <p class="card-text">{{ comment.comment }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+           
+    </div>
+
+    {% endif %}
+</div>
+
+</div>
+
+{% endblock %}
+

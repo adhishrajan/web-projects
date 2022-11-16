@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/d2556eec37.js" crossorigin="anonymous"></script>
+        <link href="{% static 'auctions/styles1.css' %}" rel="stylesheet">
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+    </head>
+    <body style="font-family: 'Times New Roman', Times, serif;"> 
+        <ul class="navbar" id="aa2">
+            <li class="nav-item">
+                <h1 style="font-family: 'Courier New', Courier, monospace; font-size: 36px;">Auctions</h1>
+            </li>
+            <li class="nav-item">     
+                <span class="navbar-text">
+                    <div>
+                    {% if user.is_authenticated %}
+                    <span style="font-size: 2em;"><i class="fas fa-user-circle fa-pull-left"></i></span>
+                        <div id="signedin">Signed in as <strong>{{ user.username }}</strong></div>
+                    {% else %}
+                        Not signed in.
+                    {% endif %}
+                    </div>
+                </span>   
+            </li>
+        </ul>
+        <hr>
+        <ul class="nav" id="aa">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}" style="color: #000000"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'categories' %}" style="color: #000000">Categories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'all' %}" style="color: #000000">All Listings</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}" style="color: #000000">Log Out</a>
+                </li>
+                <li class="nav-item">  
+                    <a class="nav-link" href="{% url 'create' %}" title="Create Listing" style="color: #000000">Create Listing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'watchlist' %}" style="color: #000000">Watchlist <span class="badge badge-secondary">{{ watchamnt }}</span></a> 
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}" style="color: #000000">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}" style="color: #000000">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+        <hr>
+
+
+
+        {% block body %}
+        {% endblock %}
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+    </body>
+</html>
+

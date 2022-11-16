@@ -1,0 +1,41 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="container">
+    <h1>Your Watchlist</h1>
+  
+</div>
+<div class="container">
+    {% for lis in list %}
+    {% for l in lis %}
+    <div class="card mb-3" style="max-width: 1000px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{ l.img }}" class="card-img" alt="Card image cap">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ l.name }}</h5>
+              <hr>
+              <p class="card-text">{{ l.description }}</p>
+              <hr>
+              <p class="card-text">${{ l.price }}</p>
+              <hr>
+              <a href="{% url 'details' l.id %}"><button class="btn btn-dark">View Listing</button></a>
+              <p class="card-text"><small class="text-muted">{{ l.date }} at {{ l.time }}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% empty %}
+      <br>
+      <div class="alert alert-dark" role="alert">
+        No listings found in your watchlist...
+      </div>
+      {% endfor %}
+</div>
+
+
+    
+{% endblock %}

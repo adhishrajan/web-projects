@@ -1,0 +1,44 @@
+{% extends "auctions/layout.html" %}
+
+
+{% block body %}
+
+{% if empty %}
+<h1 style="text-align: center;">No Listings For This Categeory...</h1>
+<br>
+{% if user.is_authenticated %}
+<a style="margin-left: 600px;" href="{% url 'create' %}"><button type="button" class="btn btn-lg btn-dark">Create A Listing!</button></a>
+{% else %}
+
+{% endif %}
+{% else %}
+
+<div class="container">
+    <h2>Category: {{ category }}</h2>
+
+</div>
+<div class="container" id="listings">
+    {% for list in c %}
+    <div class="card mb-3" style="max-width: 540px;" id="card-listings">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{ list.img }}" class="card-img" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{list.name}}</h5>
+              <p class="card-text">{{list.description}}</p>
+              <p class="card-text">${{list.price}}</p>
+              <a href="{% url 'details' list.id %}"><button type="button" class="btn btn-dark">View Listing</button></a>
+              <p class="card-text"><small class="text-muted">{{ list.date }} at {{ list.time }}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+</div>
+
+{% endif %}
+
+
+{% endblock %}
