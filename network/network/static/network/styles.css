@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    background-color: white;
+}
+
+.main {
+    padding: 10px;
+}
+
+.sidebar {
+    background-color: #4872cc; 
+    height: 100vh; 
+    padding-left: 20px;
+}
+
+
+@keyframes turn {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+.lii {
+
+    position: relative;
+    animation-name: turn;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+@keyframes move {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+.hi2 { 
+    position: relative;
+    animation-name: move;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+
+} 
+.hi { 
+    position: relative;
+    animation-name: move;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+
+} 
+.h2 {
+    color: white;
+
+}
+
+.sidebar a {
+    color: white;
+    margin-left: 30px;
+}
+
+.w {
+
+    text-align: center;
+
+}
+
+td {
+    text-align: center;
+}
+
+.tds {
+    padding-left: 20px;
+}
+
+#hello {
+   
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+      
+}
+
+#newpost {
+
+    cursor: pointer;
+}
